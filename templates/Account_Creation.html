@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Create Account</title>
+    <link rel="stylesheet" type="text/css" href="../static/Login.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script>
+        function verify_credentials(event) {
+            password = document.getElementById("password").value;
+            verify_password = document.getElementById("verify_password").value;
+            if (password !== verify_password) {
+                document.getElementById("error_message").style.display = "block";
+                return false;
+            }
+
+            new_username = document.getElementById("username").value;
+            $.post("/verify_new_username", {"new_username": new_username, "new_password": password}, function(data) {
+                if (data == "Found, not added" || data == "Blank, not added") {
+                    document.getElementById("error_message").style.display = "block";
+                }
+                else {
+                    document.getElementById("account_form").submit();
+                }
+            });
+        }
+    </script>
+</head>
+
+
+<body>
+    <div class="content card">
+        <h2>Create Account</h2>
+        <form action="{{ url_for('login_page') }}" id="account_form" method="POST">
+            <p id="error_message" style="display:none">Your password could not be verified, or that username is already taken.  Please try again.</p>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" /><br>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" /><br>
+            <label for="verify_password">Re-Enter Password</label>
+            <input type="password" id="verify_password" name="verify_password" /><br>
+            <input type="button" value="Confirm" onclick="verify_credentials(event)"/><br>
+        </form>
+    </div>
+</body>
+</html>

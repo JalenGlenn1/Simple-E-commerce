@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Add Funds</title>
+    <link rel="stylesheet" type="text/css" href="../static/AvailableItems.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script>
+        function update_funds(event, mode) {
+            if (mode == 0) {
+                $.post("/update_funds", {"new_funds": 0.0}, function() {
+                    document.getElementById("code_form").submit();
+                });
+            }
+
+            code = document.getElementById("card_code").value;
+            if (code !== "stinky cheese" && code !== "persimmon pudding" && code !== "crocodile jacket") {
+                document.getElementById("error_message").style.display = "block";
+                return false;
+            }
+            else {
+                if (code == "stinky cheese") {
+                    $.post("/update_funds", {"new_funds": 50.0}, function() {
+                        document.getElementById("code_form").submit();
+                    });
+                }
+                else if (code == "persimmon pudding") {
+                    $.post("/update_funds", {"new_funds": 100.0}, function() {
+                        document.getElementById("code_form").submit();
+                    });
+                }
+                else if (code == "crocodile jacket") {
+                    $.post("/update_funds", {"new_funds": 200.0}, function() {
+                        document.getElementById("code_form").submit();
+                    });
+                }
+            }
+        }
+
+        function logout(event) {
+            $.get("/logout", function() {});
+        }
+    </script>
+</head>
+
+<body>
+    <div>
+        <div class="header">
+            <h1>Add Funds!</h1>
+        </div>
+        <p id="error_message" style="display:none">Invalid gift card code.  Please try again.</p>
+        <form action="{{ url_for('items_page') }}" id="code_form" method="POST">
+            <label for="card_code">Enter a valid gift card code:</label>
+            <input type="text" id="card_code" name="card_code" /><br>
+            <input type="button" value="Confirm" onclick="update_funds(event, 1)"/>
+            <input type="button" value="Cancel" onclick="update_funds(event, 0)"/>
+        </form>
+    </div>
+</body>
+</html>

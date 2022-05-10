@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="../static/Login.css">
+    <title>Welcome to E-Mart!</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script>
+        function verify_credentials(event) {
+            enter_username = document.getElementById("username").value;
+            enter_password = document.getElementById("password").value;
+            $.post("/verify_login", {"enter_username": enter_username, "enter_password": enter_password}, function(data) {
+                if (data == "Login failed") {
+                    document.getElementById("error_message").style.display = "block";
+                }
+                else {
+                    document.getElementById("login_form").submit();
+                }
+            });
+        }
+    </script>
+
+</head>
+
+<body>
+    <div class="content card">
+        <h1>Welcome to E-Mart!</h1>
+        <p>{{ test }}</p>
+        <p id="error_message" style="display:none">Incorrect username and/or password.  Please try again.</p>
+        <form action="{{ url_for('items_page') }}" id="login_form" method="POST">
+            <input type="text" id="username" placeholder="Username"><br>
+            <input type="password" id="password" placeholder="Password">
+            <input class="button-31" type="button" value="Log in" onclick="verify_credentials(event)"/><br>
+        </form>
+        <a class="button-31" type="button" href="{{ url_for('account_page') }}">Create Account</a>
+        <a class="button-31" type="button" href="{{ url_for('items_page') }}">Continue as Guest</a>
+        <p>{{ log_html }}</p>
+    </div>
+</body>
+</html>
+

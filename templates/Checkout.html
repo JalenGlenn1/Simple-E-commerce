@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="../static/AvailableItems.css">
+    <title>Checkout</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script>
+        function make_purchase(event) {
+            payment_option = document.getElementById("payment_options").value;
+            if (payment_option == "gift") {
+                $.get("/gift_payment", function(data) {
+                    if (data == "Payment failed") {
+                        document.getElementById("error_message").style.display = "block";
+                    }
+                    else {
+                        document.getElementById("pay_select").submit();
+                    }
+                });
+            }
+            else {
+                $.get("/debit_credit_payment", function(data) {
+                    document.getElementById("pay_select").submit();
+                });
+            }
+        }
+
+        function cancel_purchase(event) {
+            document.getElementById("pay_select").submit();
+        }
+    </script>
+</head>
+
+<body>
+    <div>
+        <div class="header">
+            <h1>Checkout</h1>
+            <p>Total price: ${{money_html}}</p>
+        <p id="error_message" style="display:none">Not enough gift card funds.  Add more or pay with credit/debit card.</p>
+        </div>
+        <form action="{{ url_for('items_page') }}" id="pay_select" method="POST">
+            <label for="payment_options">Select payment option:</label>
+            <select name="payment_options" id="payment_options">
+                <option value="gift">Gift card</option>
+                <option value="debit-credit">Debit/credit card</option>
+            </select><br>
+            <input type="button" value="Confirm" onclick="make_purchase(event)"/>
+            <input type="button" value="Cancel" onclick="cancel_purchase(event)"/>
+        </form>
+    </div>
+</body>
+</html>

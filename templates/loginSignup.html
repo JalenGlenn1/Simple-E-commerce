@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<head>
+    <title>SignUp and Login</title>
+    <link rel="stylesheet" type="text/css" href="../static/loginSignUp.css">
+</head>
+
+<body>
+<div id="container" class="container">
+    <div class="row">
+        <div class="col align-item-center flex-col sign-up">
+            <div class="form-wrapper align-items-center">
+                <div class="form sign-up">
+                    <div class="input-group">
+                        <i class="'bx bxs-user"></i>
+                        <input type="text" placeholder="Username">
+                    </div>
+                    <div class="input-group">
+                        <i class="bx bx-mail-send"></i>
+                        <input typw="email" placeholder="Email">
+                    </div>
+                    <div class="input-group">
+                        <i class="bx bxs-lock-alt"></i>
+                        <input type="password" placeholder="Password">
+                    </div>
+                    <div class="input-group">
+                        <i class="bx bxs-lock-alt"></i>
+                        <input type="password" placeholder="Confirm Password">
+                    </div>
+                    <button>Sign Up</button>
+                    <p>
+                        <span>Already have an Account?</span>
+                        <b onclick="toggle()" class="pointer">Login Here!</b>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col align-items-center flex-col sign-in">
+            <div class="form-wrapper align-items-center">
+                <div class="form sign-in">
+                    <div class="input-group">
+                        <i class="bx bxs-user"></i>
+                        <input type="text" placeholder="Username">
+                    </div>
+                    <div class="input-group">
+                        <i class="bx bxs-lock-alt"></i>
+                        <input type="password" placeholder="Password">
+                    </div>
+                    <button>Sign In</button>
+                    <p>
+                        <b>Forgot Password?</b>
+                    </p>
+                    <p>
+                        <span>Don't have an Account?</span>
+                        <b onclick="toggle()" class="pointer">Sign up here</b>
+                    </p>
+                    <p>
+                        <b>or Continue as Guest</b>
+                    </p>
+                </div>
+            </div>
+            <div class="form-wrapper">
+            </div>
+        </div>
+    </div>
+    <div class="row content-row">
+        <div class="col align-items-center flex-col">
+            <div class="text sign-in">
+                <h2>Welcome to E-Mart!</h2>
+            </div>
+            <div class="img sign-in"></div>
+        </div>
+        <div class="col align-items-center flex-col">
+            <div class="img sign-up"></div>
+            <div class="text sign-up">
+                <h2>Come and Join Us Today!</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+        let container = document.getElementById('container')
+        toggle = () => {
+            container.classList.toggle('sign-up')
+        }
+        setTimeout(() => {
+            container.classList.add('sign-in')
+        }, 200)
+    </script>
+</body>
+</html>

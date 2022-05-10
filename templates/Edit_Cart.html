@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="../static/EditCart.css">
+    <title>Edit Cart</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script>
+        function update_quantities(event) {
+            new_quantity_a = document.getElementById("quantity_a").value;
+            new_quantity_b = document.getElementById("quantity_b").value;
+            new_quantity_c = document.getElementById("quantity_c").value;
+            new_quantity_d = document.getElementById("quantity_d").value;
+            new_quantity_e = document.getElementById("quantity_e").value;
+            $.post("/update_quantities", {"new_quantity_a": new_quantity_a, "new_quantity_b": new_quantity_b, "new_quantity_c": new_quantity_c, "new_quantity_d": new_quantity_d, "new_quantity_e": new_quantity_e}, function(){});
+        }
+
+        function logout(event) {
+            $.get("/logout", function() {});
+        }
+    </script>
+</head>
+
+<body>
+    <div>
+        <div class="header">
+            <h2>Edit Cart</h2>
+        </div>
+        <form action="{{ url_for('items_page') }}" onsubmit="update_quantities(event)" method="POST">
+            <p><img src="{{url_for('static', filename='images/waddle dee plush.jpg')}}" alt="Waddle Dee Plush - $14.99" style="width:100px;height:100px;"> Waddle Dee Plush - $14.99 <input type="number" id="quantity_a" name="quantity_a" min="0" max="99"></p>
+            <p><img src="{{url_for('static', filename='images/N9-Mask.jpg')}}" alt="100 Box of N9-Mask - $15.99" style="width:100px;height:100px;"> 100 Box of N9-Mask - $15.99 <input type="number" id="quantity_b" name="quantity_b" min="0" max="99"></p>
+            <p><img src="{{url_for('static', filename='images/HandSanitizer.jpeg')}}" alt="Hand Sanitizer - $3.99" style="width:100px;height:100px;"> Hand Sanitizer - $3.99 <input type="number" id="quantity_c" name="quantity_c" min="0" max="99"></p>
+            <p><img src="https://www.nvidia.com/content/dam/en-zz/Solutions/geforce/ampere/rtx-3090/geforce-rtx-3090-shop-630-d.png" alt="Nvidia 3090Ti Graphics Card - $2899.99" style="width:100px;height:100px;"> Nvidia 3090Ti Graphics Card - $2899.99 <input type="number" id="quantity_d" name="quantity_d" min="0" max="99"></p>
+            <p><img src="https://i5.walmartimages.com/asr/f62842fd-263f-46d4-8954-9fbe1a25d636.fefa1d11a99643573cf756f2ce835c05.png" alt="Playstation 5 console - $499.99" style="width:100px;height:100px;"> Playstation 5 console - $499.99 <input type="number" id="quantity_e" name="quantity_e" min="0" max="99"></p>
+            <input type="submit" value="Save Cart" />
+            <p>(May need to refresh page after submitting)</p>
+        </form>
+        <p><a href="{{ url_for('checkout_page') }}">Checkout</a></p>
+        <p><a href="{{ url_for('login_page') }}" onclick="logout(event)">Log Out</a></p>
+    </div>
+
+</body>
+</html>

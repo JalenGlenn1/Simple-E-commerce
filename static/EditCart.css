@@ -1,0 +1,61 @@
+div.content {
+    margin: 0;
+    width: 20%;
+    height: 40%;
+    position: absolute;
+    top: 30%;
+    left: 40%;
+}
+
+body {
+    height: 100vh;
+    background-color: purple
+}
+
+input[type=number], select {
+    width: 12%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid rgb(245, 242, 242);
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  input[type=submit] {
+    width: 30%;
+    background-color: #06a2f0;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  input[type=submit]:hover {
+    background-color: #09cfbe;
+  }
+
+  .header {
+    padding: 60px;
+    text-align: center;
+    background: #0189a1;
+    color: white;
+    font-size: 30px;
+  }
+  
+  a:link, a:visited {
+    background-color: white;
+    color: black;
+    border: 2px solid rgb(2, 175, 223);
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  a:hover, a:active {
+    background-color: rgb(6, 216, 212);
+    color: white;
+  }
